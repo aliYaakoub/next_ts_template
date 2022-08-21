@@ -5,3 +5,4 @@ public
 out
 **/*.css
 **/*.scss
+internals/generators/plopfile.mjs
