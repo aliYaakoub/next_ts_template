@@ -1,0 +1,34 @@
+/**
+*
+*
+*      {{ properCase componentName }}
+*
+*
+*/
+
+import React from 'react';
+import { useTranslation } from 'next-i18next';
+
+interface Props {}
+
+{{#if wantMemo}}
+const {{ properCase componentName }}: React.FC<Props> = React.memo(({}) => {
+{{else}}
+const {{ properCase componentName }}: React.FC<Props> = ({}) => {
+{{/if}}
+  const { t } = useTranslation('common');
+
+  return (
+    <div>
+      {t('')}
+      {{ properCase componentName }}
+    </div>
+  );
+
+{{#if wantMemo}}
+});
+{{else}}
+};
+{{/if}}
+
+export default {{ properCase componentName }};

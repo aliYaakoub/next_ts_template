@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "plop --plopfile internals/generators/plopfile.mjs",
+    "generate": "plop --plopfile .internals/generators/plopfile.mjs",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "inquirer": "^9.1.0",
+    "inquirer-directory": "^2.2.0",
     "next": "12.2.5",
     "next-i18next": "^12.0.0",
     "nprogress": "^0.2.0",

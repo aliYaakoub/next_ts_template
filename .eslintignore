@@ -6,3 +6,5 @@ out
 **/*.css
 **/*.scss
 internals/generators/plopfile.mjs
+internals/generators/page/index.mjs
+internals/generators/component/index.mjs

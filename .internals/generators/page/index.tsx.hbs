@@ -1,0 +1,63 @@
+/**
+*
+*
+*      {{ properCase componentName }}
+*
+*
+*/
+
+{{#ifEquals renderingStyle 'SSR'}}
+import type { GetServerSideProps, NextPage } from 'next';
+{{else}}
+import type { GetStaticProps, NextPage } from 'next';
+{{/ifEquals}}
+import React from 'react';
+import Head from 'next/head';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+{{#if wantStyles}}
+import styles from '../styles/{{ properCase componentName }}.module.css';
+{{/if}}
+
+const {{ properCase componentName }}: NextPage = () => {
+  const { t } = useTranslation('common');
+
+  return (
+    <>
+      <Head>
+        <meta name="title" content="{{ titleCase componentName }}" />
+        <meta name="description" content="{{ titleCase componentName }}" />
+        <title>{{ titleCase componentName }}</title>
+      </Head>
+      {{#if wantStyles}}
+      <main className={styles.main}>
+      {{else}}
+      <main>
+      {{/if}}
+        {t('')}
+        <h1>{{ titleCase componentName }}</h1>
+      </main>
+    </>
+  );
+};
+
+export default {{ properCase componentName }};
+
+
+{{#ifEquals renderingStyle 'SSR'}}
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common'])),
+    },
+  };
+};
+{{else}}
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common'])),
+    },
+  };
+};
+{{/ifEquals}}
