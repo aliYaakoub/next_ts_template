@@ -1,0 +1,39 @@
+import { useTranslation } from 'next-i18next';
+import React from 'react';
+import BaseModal from './BaseModal';
+
+interface Props {
+  setExit: React.Dispatch<React.SetStateAction<boolean>>;
+  exit: boolean;
+}
+
+const {{properCase componentName}}: React.FC<Props> = ({ exit, setExit }) => {
+  const { t } = useTranslation('common');
+
+  return (
+    <BaseModal exit={exit} setExit={setExit}>
+      <div className='w-[300px] h-[300px] bg-white rounded text-black p-5 relative'>
+        <button onClick={()=>setExit(false)} className='absolute top-2 right-2'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.2}
+            stroke='#333'
+            className='w-5 h-5'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M6 18L18 6M6 6l12 12'
+            />
+          </svg>
+        </button>
+        {t('')}
+        <h2>{{titleCase componentName}}</h2>
+      </div>
+    </BaseModal>
+  );
+};
+
+export default {{properCase componentName}};
