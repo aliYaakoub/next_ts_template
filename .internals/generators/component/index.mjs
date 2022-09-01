@@ -30,6 +30,7 @@ export const componentGenerator = {
         path: path,
         templateFile: './component/index.tsx.hbs',
         abortOnFail: true,
+        skipIfExists: true,
       },
     ];
 

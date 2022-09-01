@@ -63,6 +63,7 @@ export const pagesGenerator = {
         path: '../../styles/{{properCase componentName}}.module.css',
         templateFile: './page/style.module.css.hbs',
         abortOnFail: true,
+        skipIfExists: true,
       });
     }
 

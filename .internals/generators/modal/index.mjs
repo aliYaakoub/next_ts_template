@@ -18,6 +18,7 @@ export const modalGenerator = {
         path: path,
         templateFile: './modal/index.tsx.hbs',
         abortOnFail: true,
+        skipIfExists: true,
       },
     ];
 
