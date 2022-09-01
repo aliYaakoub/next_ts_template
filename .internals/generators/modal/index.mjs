@@ -1,9 +1,4 @@
-import inquirer from 'inquirer';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url)
 import { modalsBaseGeneratorPath } from '../paths.js';
-
-inquirer.registerPrompt('directory', require('inquirer-directory'));
 
 export const modalGenerator = {
   description: 'Add a modal',
@@ -15,7 +10,6 @@ export const modalGenerator = {
     },
   ],
   actions: () => {
-
     const path = `${modalsBaseGeneratorPath}/{{properCase componentName}}.tsx`;
 
     const actions = [
@@ -29,4 +23,4 @@ export const modalGenerator = {
 
     return actions;
   },
-}
+};

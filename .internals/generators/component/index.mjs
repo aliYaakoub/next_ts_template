@@ -1,9 +1,4 @@
-import inquirer from 'inquirer';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url)
 import { componentsBaseGeneratorPath } from '../paths.js';
-
-inquirer.registerPrompt('directory', require('inquirer-directory'));
 
 export const componentGenerator = {
   description: 'Add a component',
@@ -27,7 +22,6 @@ export const componentGenerator = {
     },
   ],
   actions: (data) => {
-
     const path = `${componentsBaseGeneratorPath}/${data.basePath}/{{properCase componentName}}.tsx`;
 
     const actions = [
@@ -41,4 +35,4 @@ export const componentGenerator = {
 
     return actions;
   },
-}
+};

@@ -1,9 +1,4 @@
-import inquirer from 'inquirer';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url)
 import { pagesBaseGeneratorPath } from '../paths.js';
-
-inquirer.registerPrompt('directory', require('inquirer-directory'));
 
 export const pagesGenerator = {
   description: 'Add a page',
@@ -35,20 +30,23 @@ export const pagesGenerator = {
       type: 'list',
       name: 'renderingStyle',
       default: 'SSR',
-      choices: [{
-        name: 'Server Side Rendering (SSR)',
-        value: 'SSR',
-      },
-      {
-        name: 'Static Site Generation (SSG)',
-        value: 'SSG',
-      }],
+      choices: [
+        {
+          name: 'Server Side Rendering (SSR)',
+          value: 'SSR',
+        },
+        {
+          name: 'Static Site Generation (SSG)',
+          value: 'SSG',
+        },
+      ],
       message: 'Do you want to use SSR or SSG ?',
     },
   ],
   actions: (data) => {
-
-    const path = data.isDynamic ? `${pagesBaseGeneratorPath}/${data.basePath}/[{{dashCase componentName}}].tsx` : `${pagesBaseGeneratorPath}/${data.basePath}/{{dashCase componentName}}.tsx`;
+    const path = data.isDynamic
+      ? `${pagesBaseGeneratorPath}/${data.basePath}/[{{dashCase componentName}}].tsx`
+      : `${pagesBaseGeneratorPath}/${data.basePath}/{{dashCase componentName}}.tsx`;
 
     const actions = [
       {
@@ -70,4 +68,4 @@ export const pagesGenerator = {
 
     return actions;
   },
-}
+};
