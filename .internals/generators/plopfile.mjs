@@ -13,9 +13,43 @@ export default async function (
     return arg1 == arg2 ? options.fn(this) : options.inverse(this);
   });
 
+  plop.setHelper('ifIncludes', function () {
+    const options = arguments[arguments.length - 1];
+    const array = arguments[0];
+    const args = [];
+    for (const key in arguments) {
+      if (key === '0') continue;
+      if (key === (arguments.length - 1).toString()) continue;
+      args.push(arguments[key]);
+    }
+    return args.every((value) => {
+      return array.includes(value);
+    })
+      ? options.fn(this)
+      : options.inverse(this);
+  });
+
+  plop.setHelper('ifIncludesAny', function () {
+    const options = arguments[arguments.length - 1];
+    const array = arguments[0];
+    const args = [];
+    for (const key in arguments) {
+      if (key === '0') continue;
+      if (key === (arguments.length - 1).toString()) continue;
+      args.push(arguments[key]);
+    }
+    return args.some((value) => {
+      return array.includes(value);
+    })
+      ? options.fn(this)
+      : options.inverse(this);
+  });
+
   plop.setPrompt('directory', require('inquirer-directory'));
 
   plop.setGenerator('page', pagesGenerator);
+
+  plop.setGenerator('api route', ApiRouteGenerator);
 
   plop.setGenerator('modal', modalGenerator);
 

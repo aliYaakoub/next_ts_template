@@ -1,0 +1,57 @@
+/**
+ *
+ *
+ *      {{ properCase componentName }}
+ *
+ *
+ */
+
+import type { NextApiRequest, NextApiResponse } from 'next';
+// modify imports if necessary
+import type { ErrorResponse, ApiResponse } from '../../types';
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  {{#if isDynamic}}
+  const { {{ properCase componentName }} } = req.query;
+
+  {{/if}}
+  {{#ifIncludes method 'POST'}}
+  if (req.method === 'POST') { 
+    return res.status(201).end();
+  {{/ifIncludes}}
+  {{#ifIncludes method 'GET'}}
+    {{#ifIncludes method 'POST'}}
+  } else if (req.method === 'GET') {
+    return res.status(200).json({
+      data: {},
+    } as ApiResponse);
+    {{else}}
+  if (req.method === 'GET') {
+    return res.status(200).json({
+      data: {},
+    } as ApiResponse);
+    {{/ifIncludes}}
+  {{/ifIncludes}}
+  {{#ifIncludes method 'DELETE'}}
+    {{#ifIncludesAny method 'POST' 'GET'}}
+  } else if (req.method === 'DELETE') {
+    return res.status(200).end();
+    {{else}}
+  if (req.method === 'DELETE') {
+    return res.status(200).end();
+    {{/ifIncludesAny}}
+  {{/ifIncludes}}
+  {{#ifIncludes method 'PUT'}}
+    {{#ifIncludesAny method 'POST' 'GET' 'DELETE'}}
+  } else if (req.method === 'PUT') {
+    return res.status(200).end();
+    {{else}}
+  if (req.method === 'PUT') {
+    return res.status(200).end();
+    {{/ifIncludesAny}}
+  {{/ifIncludes}}
+  } else {
+    return res.status(405).end();
+  }
+};
+ 
