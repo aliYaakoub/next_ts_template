@@ -20,19 +20,64 @@ export const componentGenerator = {
       default: false,
       message: 'Do you want to wrap your component in React.memo?',
     },
+    {
+      type: 'confirm',
+      name: 'wantLoadable',
+      default: false,
+      message: 'Do you want to load the component asynchronously?',
+    },
+    {
+      type: 'confirm',
+      name: 'wantStyles',
+      default: false,
+      message: 'Do you want a css module for this component?',
+    },
   ],
   actions: (data) => {
-    const path = `${componentsBaseGeneratorPath}/${data.basePath}/{{properCase componentName}}.tsx`;
+    let path = '';
+    let actions = [];
 
-    const actions = [
-      {
+    if (data.wantStyles || data.wantLoadable) {
+      path = `${componentsBaseGeneratorPath}/${data.basePath}/{{properCase componentName}}`;
+
+      actions.push({
+        type: 'add',
+        path: `${path}/index.tsx`,
+        templateFile: './component/index.tsx.hbs',
+        abortOnFail: true,
+        skipIfExists: true,
+      });
+
+      if (data.wantStyles) {
+        actions.push({
+          type: 'add',
+          path: `${path}/{{properCase componentName}}.module.css`,
+          templateFile: './component/style.module.css.hbs',
+          abortOnFail: true,
+          skipIfExists: true,
+        });
+      }
+
+      if (data.wantLoadable) {
+        actions.push({
+          type: 'add',
+          path: `${path}/Loadable.ts`,
+          templateFile: './component/Loadable.ts.hbs',
+          abortOnFail: true,
+          skipIfExists: true,
+        });
+      }
+    } else {
+      path = `${componentsBaseGeneratorPath}/${data.basePath}/{{properCase componentName}}.tsx`;
+
+      actions.push({
         type: 'add',
         path: path,
         templateFile: './component/index.tsx.hbs',
         abortOnFail: true,
         skipIfExists: true,
-      },
-    ];
+      });
+    }
 
     return actions;
   },

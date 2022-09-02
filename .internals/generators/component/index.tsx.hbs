@@ -1,30 +1,35 @@
 /**
-*
-*
-*      {{ properCase componentName }}
-*
-*
-*/
+ *
+ *
+ *      {{ properCase componentName }}
+ *
+ *
+ */
 
 import React from 'react';
 import { useTranslation } from 'next-i18next';
-
+{{#if wantStyles}}
+import styles from './{{properCase componentName}}.module.css';
+{{/if}}
 interface Props {}
 
 {{#if wantMemo}}
-const {{ properCase componentName }}: React.FC<Props> = React.memo(({}) => {
+const {{ properCase componentName }}: React.FC<Props> = React.memo(() => {
 {{else}}
-const {{ properCase componentName }}: React.FC<Props> = ({}) => {
+const {{ properCase componentName }}: React.FC<Props> = () => {
 {{/if}}
   const { t } = useTranslation('common');
 
   return (
+    {{#if wantStyles}}
+    <div className={styles.container}>
+    {{else}}
     <div>
+    {{/if}}
       {t('')}
       {{ properCase componentName }}
     </div>
   );
-
 {{#if wantMemo}}
 });
 {{else}}
