@@ -11,7 +11,8 @@ export const ApiRouteGenerator = {
     {
       type: 'directory',
       name: 'basePath',
-      message: 'Where do you want it to be created?',
+      message:
+        'Where do you want it to be created? (if you want it to be nested in another folder please create it before generating)',
       basePath: `${apiRouteBaseGeneratorPath}`,
     },
     {

@@ -16,9 +16,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          {t('title')}
-        </h1>
+        <h1 className={styles.title}>{t('title')}</h1>
 
         <p className={styles.description}>
           Get started by editing{' '}
@@ -73,7 +71,6 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   return {
