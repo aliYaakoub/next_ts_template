@@ -1,4 +1,4 @@
-import { pagesBaseGeneratorPath } from '../paths.js';
+import { apiRouteBaseGeneratorPath, pagesBaseGeneratorPath } from '../paths.js';
 
 export const pagesGenerator = {
   description: 'Add a page',
@@ -28,6 +28,26 @@ export const pagesGenerator = {
       message: 'Is this Route Dynamic? (example: /[id].tsx)',
     },
     {
+      type: 'confirm',
+      name: 'wantAForm',
+      default: false,
+      message: 'Are you using a form in this page?',
+    },
+    {
+      type: 'confirm',
+      name: 'usingAnInsideApiRoute',
+      default: false,
+      message: 'Are you using an inside api in this form?',
+      when: (data) => data.wantAForm,
+    },
+    {
+      type: 'file-tree-selection',
+      name: 'apiName',
+      root: `${apiRouteBaseGeneratorPath}`,
+      message: 'Select the api route you want to use',
+      when: (data) => data.usingAnInsideApiRoute,
+    },
+    {
       type: 'list',
       name: 'renderingStyle',
       default: 'SSR',
@@ -49,6 +69,12 @@ export const pagesGenerator = {
       ? `${pagesBaseGeneratorPath}/${data.basePath}/[{{dashCase componentName}}].tsx`
       : `${pagesBaseGeneratorPath}/${data.basePath}/{{dashCase componentName}}.tsx`;
 
+    if (data.usingAnInsideApiRoute) {
+      const fileName = data.apiName.split('\\');
+      if (!fileName.at(-1).includes('.ts'))
+        throw new Error('please select a file not a folder.');
+    }
+
     const actions = [
       {
         type: 'add',
@@ -63,6 +89,16 @@ export const pagesGenerator = {
         type: 'add',
         path: '../../styles/{{properCase componentName}}.module.css',
         templateFile: './page/style.module.css.hbs',
+        abortOnFail: true,
+        skipIfExists: true,
+      });
+    }
+
+    if (data.wantAForm) {
+      actions.push({
+        type: 'add',
+        path: '../../config/yupSchemas/{{properCase componentName}}Schema.ts',
+        templateFile: './page/yup.ts.hbs',
         abortOnFail: true,
         skipIfExists: true,
       });

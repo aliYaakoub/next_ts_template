@@ -23,7 +23,8 @@
       "@/components/*": ["components/*"],
       "@/types/*": ["types/*"],
       "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "@/config/*": ["config/*"]
     },
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],

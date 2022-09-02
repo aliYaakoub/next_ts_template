@@ -18,10 +18,50 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 {{#if wantStyles}}
 import styles from 'styles/{{ properCase componentName }}.module.css';
 {{/if}}
+{{#if wantAForm}}
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
+import { Schema } from 'config/yupSchemas/{{properCase componentName}}Schema';
+{{/if}}
 
 const {{ properCase componentName }}: NextPage = () => {
   const { t } = useTranslation('common');
+  {{#if wantAForm}}
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  {{/if}}
 
+  {{#if wantAForm}}
+  // change the type from any to the type of the form body
+  // for more information check the docs at https://react-hook-form.com/
+  const formMethods = useForm<any>({
+    resolver: yupResolver(Schema),
+  });
+
+  const { 
+    formState: { errors },
+    register, 
+    handleSubmit,
+  } = formMethods;
+
+  // change the type from any to the type of the form body
+  const onSubmit: SubmitHandler<any> = async (d) => {
+    setIsLoading(true);
+    try {
+      {{#if usingAnInsideApiRoute}}
+      const resp = await fetch('{{getApiName apiName}}', {
+      {{else}}
+      const resp = await fetch('', {
+      {{/if}}
+        method: 'POST',
+        body: JSON.stringify({
+          // form body example: name: d.name
+        }),
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  {{/if}}
   return (
     <>
       <Head>
@@ -29,6 +69,26 @@ const {{ properCase componentName }}: NextPage = () => {
         <meta name="description" content="{{ titleCase componentName }}" />
         <title>{{ titleCase componentName }}</title>
       </Head>
+      {{#if wantAForm}}
+      {/* to use this form in a child component use useFormContext */}
+      <FormProvider {...formMethods}>
+        {{#if wantStyles}}
+        <main className={styles.main}>
+        {{else}}
+        <main>
+        {{/if}}
+          {t('')}
+          <h1>{{ titleCase componentName }}</h1>
+          {/* usage example */}
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input {...register('name')} />
+            {errors.name && (
+              <p className='px-2 pb-2 text-error'>{errors.name.message}</p>
+            )}
+          </form>
+        </main>
+      </FormProvider>
+      {{else}}
       {{#if wantStyles}}
       <main className={styles.main}>
       {{else}}
@@ -37,6 +97,7 @@ const {{ properCase componentName }}: NextPage = () => {
         {t('')}
         <h1>{{ titleCase componentName }}</h1>
       </main>
+      {{/if}}
     </>
   );
 };

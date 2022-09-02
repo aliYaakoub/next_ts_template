@@ -2,7 +2,9 @@ import { pagesGenerator } from './page/index.mjs';
 import { modalGenerator } from './modal/index.mjs';
 import { componentGenerator } from './component/index.mjs';
 import { ApiRouteGenerator } from './api-route/index.mjs';
+import inquirerFileTreeSelection from 'inquirer-file-tree-selection-prompt';
 import { createRequire } from 'module';
+import { pagesBaseGeneratorPath } from './paths.js';
 const require = createRequire(import.meta.url);
 
 export default async function (
@@ -11,6 +13,12 @@ export default async function (
 ) {
   plop.setHelper('ifEquals', function (arg1, arg2, options) {
     return arg1 == arg2 ? options.fn(this) : options.inverse(this);
+  });
+
+  plop.setHelper('getApiName', function (arg) {
+    const path = arg.replace(pagesBaseGeneratorPath, '');
+    const api_path = path.replaceAll('\\', '/').replace('.ts', '');
+    return api_path;
   });
 
   plop.setHelper('ifIncludes', function () {
@@ -46,6 +54,7 @@ export default async function (
   });
 
   plop.setPrompt('directory', require('inquirer-directory'));
+  plop.setPrompt('file-tree-selection', inquirerFileTreeSelection);
 
   plop.setGenerator('page', pagesGenerator);
 
