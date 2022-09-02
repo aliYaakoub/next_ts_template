@@ -9,6 +9,9 @@
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 import BaseModal from 'components/modals/BaseModal';
+{{#if wantStyles}}
+import styles from './{{ properCase componentName }}.module.css';
+{{/if}}
 
 interface Props {
   setExit: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,8 +23,15 @@ const {{properCase componentName}}: React.FC<Props> = ({ exit, setExit }) => {
 
   return (
     <BaseModal exit={exit} setExit={setExit}>
+      {{#if wantStyles}}
+      <div className={styles.container}>
+      {{else}}
       <div className='w-[300px] h-[300px] bg-white rounded text-black p-5 relative'>
-        <button onClick={()=>setExit(false)} className='absolute top-2 right-2'>
+      {{/if}}
+        <button 
+          onClick={()=>setExit(false)} 
+          className='absolute top-2 right-2'
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
