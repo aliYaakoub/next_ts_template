@@ -13,8 +13,10 @@ import type { GetStaticProps, NextPage } from 'next';
 {{/ifEquals}}
 import React from 'react';
 import Head from 'next/head';
+{{#if wantTranslation}}
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+{{/if}}
 {{#if wantStyles}}
 import styles from 'styles/{{ properCase componentName }}.module.css';
 {{/if}}
@@ -25,7 +27,9 @@ import { Schema } from 'config/yupSchemas/{{properCase componentName}}Schema';
 {{/if}}
 
 const {{ properCase componentName }}: NextPage = () => {
+  {{#if wantTranslation}}
   const { t } = useTranslation('common');
+  {{/if}}
   {{#if wantAForm}}
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   {{/if}}
@@ -77,7 +81,9 @@ const {{ properCase componentName }}: NextPage = () => {
         {{else}}
         <main>
         {{/if}}
+          {{#if wantTranslation}}
           {t('')}
+          {{/if}}
           <h1>{{ titleCase componentName }}</h1>
           {/* usage example */}
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -94,7 +100,9 @@ const {{ properCase componentName }}: NextPage = () => {
       {{else}}
       <main>
       {{/if}}
+        {{#if wantTranslation}}
         {t('')}
+        {{/if}}
         <h1>{{ titleCase componentName }}</h1>
       </main>
       {{/if}}
@@ -106,19 +114,43 @@ export default {{ properCase componentName }};
 
 
 {{#ifEquals renderingStyle 'SSR'}}
+{{#if wantTranslation}}
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+{{else}}
+export const getServerSideProps: GetServerSideProps = async () => {
+{{/if}}
   return {
+    {{#if wantTranslation}}
+      /* 'common' is the default json translation file, if you want to 
+      change it create a new json file in the public/locales/en folder 
+      and add it here and in the useTranslation hook above.
+      for more information check the docs at https://github.com/i18next/next-i18next#readme */
     props: {
       ...(await serverSideTranslations(locale as string, ['common'])),
     },
+    {{else}}
+    props: {},
+    {{/if}}
   };
 };
 {{else}}
+{{#if wantTranslation}}
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
+{{else}}
+export const getStaticProps: GetStaticProps = async () => {
+{{/if}}
   return {
+    {{#if wantTranslation}}
+      /* 'common' is the default json translation file, if you want to 
+      change it create a new json file in the public/locales/en folder 
+      and add it here and in the useTranslation hook above.
+      for more information check the docs at https://github.com/i18next/next-i18next#readme */
     props: {
       ...(await serverSideTranslations(locale as string, ['common'])),
     },
+    {{else}}
+    props: {},
+    {{/if}}
   };
 };
 {{/ifEquals}}

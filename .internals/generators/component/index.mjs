@@ -23,6 +23,12 @@ export const componentGenerator = {
     },
     {
       type: 'confirm',
+      name: 'wantTranslation',
+      default: false,
+      message: 'Do you want this page translated?',
+    },
+    {
+      type: 'confirm',
       name: 'wantLoadable',
       default: false,
       message: 'Do you want to load the component asynchronously?',

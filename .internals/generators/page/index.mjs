@@ -29,6 +29,12 @@ export const pagesGenerator = {
     },
     {
       type: 'confirm',
+      name: 'wantTranslation',
+      default: false,
+      message: 'Do you want this page translated?',
+    },
+    {
+      type: 'confirm',
       name: 'wantAForm',
       default: false,
       message: 'Are you using a form in this page?',

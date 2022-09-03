@@ -6,7 +6,9 @@
  *
  */
 
+{{#if wantTranslation}}
 import { useTranslation } from 'next-i18next';
+{{/if}}
 import React from 'react';
 import BaseModal from 'components/modals/BaseModal';
 {{#if wantStyles}}
@@ -19,7 +21,9 @@ interface Props {
 }
 
 const {{properCase componentName}}: React.FC<Props> = ({ exit, setExit }) => {
+  {{#if wantTranslation}}
   const { t } = useTranslation('common');
+  {{/if}}
 
   return (
     <BaseModal exit={exit} setExit={setExit}>
@@ -47,7 +51,9 @@ const {{properCase componentName}}: React.FC<Props> = ({ exit, setExit }) => {
             />
           </svg>
         </button>
+        {{#if wantTranslation}}
         {t('')}
+        {{/if}}
         <h2>{{titleCase componentName}}</h2>
       </div>
     </BaseModal>

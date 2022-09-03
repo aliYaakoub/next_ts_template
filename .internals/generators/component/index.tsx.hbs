@@ -7,7 +7,9 @@
  */
 
 import React from 'react';
+{{#if wantTranslation}}
 import { useTranslation } from 'next-i18next';
+{{/if}}
 {{#if wantStyles}}
 import styles from './{{properCase componentName}}.module.css';
 {{/if}}
@@ -18,7 +20,9 @@ const {{ properCase componentName }}: React.FC<Props> = React.memo(() => {
 {{else}}
 const {{ properCase componentName }}: React.FC<Props> = () => {
 {{/if}}
+  {{#if wantTranslation}}
   const { t } = useTranslation('common');
+  {{/if}}
 
   return (
     {{#if wantStyles}}
@@ -26,7 +30,9 @@ const {{ properCase componentName }}: React.FC<Props> = () => {
     {{else}}
     <div>
     {{/if}}
+      {{#if wantTranslation}}
       {t('')}
+      {{/if}}
       {{ properCase componentName }}
     </div>
   );
