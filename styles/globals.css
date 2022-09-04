@@ -6,3 +6,11 @@ html {
   background-color: black;
   color: #fff
 }
+
+.font-serif {
+  font-family: 'Roboto Serif', serif;
+}
+
+.font-sons {
+  font-family: 'Montserrat', sans-serif;
+}
