@@ -11,7 +11,11 @@ import React from 'react';
 import { useTranslation } from 'next-i18next';
 {{/if}}
 {{#if wantStyles}}
-import styles from './{{properCase componentName}}.module.css';
+import styles from './{{ properCase componentName }}.module.css';
+{{/if}}
+{{#if wantSkeleton}}
+import {{ properCase componentName }}Skeleton from './Skeleton';
+// conditionally render this component ⬆️ when this component is still loading (fetching data for example)
 {{/if}}
 interface Props {}
 

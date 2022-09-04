@@ -1,0 +1,31 @@
+import React from 'react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
+// Example of usage:
+// for more informations check the docs
+// at https://github.com/dvtng/react-loading-skeleton#readme
+  
+const {{ properCase componentName }}Skeleton = () => {
+  return (
+    <SkeletonTheme baseColor='#A9A9A9' highlightColor='#D9D9D9'>
+      <div className='border-2 border-[#A9A9A9] p-5 w-fit flex rounded-lg'>
+        <Skeleton
+          width={200}
+          height={200}
+          baseColor='#A9A9A9'
+          highlightColor='#D9D9D9'
+        />
+        <div className='w-80 ml-5'>
+          <Skeleton count={0.7} className='mb-5' />
+          <Skeleton count={1.8} />
+          <div className='mt-5'>
+            <Skeleton count={3.3} />
+          </div>
+        </div>
+      </div>
+    </SkeletonTheme>
+  );
+};
+
+export default {{ properCase componentName }}Skeleton;

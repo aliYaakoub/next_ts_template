@@ -17,6 +17,12 @@ export const componentGenerator = {
     },
     {
       type: 'confirm',
+      name: 'wantSkeleton',
+      default: false,
+      message: 'Do you want a skeleton loading component for this component?',
+    },
+    {
+      type: 'confirm',
       name: 'wantMemo',
       default: false,
       message: 'Do you want to wrap your component in React.memo?',
@@ -44,7 +50,7 @@ export const componentGenerator = {
     let path = '';
     let actions = [];
 
-    if (data.wantStyles || data.wantLoadable) {
+    if (data.wantStyles || data.wantLoadable || data.wantSkeleton) {
       path = `${componentsBaseGeneratorPath}/${data.basePath}/{{properCase componentName}}`;
 
       actions.push({
@@ -70,6 +76,16 @@ export const componentGenerator = {
           type: 'add',
           path: `${path}/Loadable.ts`,
           templateFile: './component/Loadable.ts.hbs',
+          abortOnFail: true,
+          skipIfExists: true,
+        });
+      }
+
+      if (data.wantSkeleton) {
+        actions.push({
+          type: 'add',
+          path: `${path}/Skeleton.tsx`,
+          templateFile: './component/Skeleton.tsx.hbs',
           abortOnFail: true,
           skipIfExists: true,
         });
