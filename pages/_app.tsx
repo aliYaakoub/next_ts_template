@@ -1,3 +1,6 @@
+import 'sanitize.css';
+import 'sanitize.css/forms.css';
+import 'sanitize.css/typography.css';
 import '../styles/globals.css';
 import 'nprogress/nprogress.css';
 import NProgress from 'nprogress';
