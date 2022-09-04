@@ -3,6 +3,7 @@ import 'sanitize.css/forms.css';
 import 'sanitize.css/typography.css';
 import '../styles/globals.css';
 import 'nprogress/nprogress.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 import NProgress from 'nprogress';
 import Router from 'next/router';
 import type { AppProps } from 'next/app';
