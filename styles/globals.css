@@ -2,15 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  background-color: black;
-  color: #fff
-}
-
 .font-serif {
   font-family: 'Roboto Serif', serif;
 }
 
-.font-sons {
+.font-sans {
   font-family: 'Montserrat', sans-serif;
+}
+
+@layer components {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .flex-col-center {
+    @apply flex flex-col items-center justify-center;
+  }
+  p {
+    @apply font-sans
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif
+  }
 }
