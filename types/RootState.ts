@@ -1,4 +1,4 @@
-import { ExampleState } from 'slices/TestSlice/types';
+import { ExampleState } from 'slices/ExampleSlice/types';
 // COMPONENT IMPORTS
 
 /* 

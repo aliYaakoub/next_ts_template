@@ -1,12 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { cartSaga } from './saga';
-import { ExampleState } from './types';
+import { ExampleState, Post } from './types';
 
 export const initialState: ExampleState = {
   number: 0,
+  post: null,
+  isFetching: false,
 };
 
 const slice = createSlice({
@@ -18,6 +21,13 @@ const slice = createSlice({
     },
     decrease(state) {
       state.number -= 1;
+    },
+    fetchData(state) {},
+    setIsFetching(state, action: PayloadAction<boolean>) {
+      state.isFetching = action.payload;
+    },
+    setData(state, action: PayloadAction<Post | null>) {
+      state.post = action.payload;
     },
   },
 });
