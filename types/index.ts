@@ -1,3 +1,7 @@
+import { RootState } from './RootState';
+
+export type { RootState };
+
 export interface ErrorResponse {
   errors: {
     title: string;
