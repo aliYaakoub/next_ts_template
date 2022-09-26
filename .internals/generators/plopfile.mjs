@@ -5,6 +5,7 @@ import { ApiRouteGenerator } from './api-route/index.mjs';
 import inquirerFileTreeSelection from 'inquirer-file-tree-selection-prompt';
 import { createRequire } from 'module';
 import { pagesBaseGeneratorPath } from './paths.js';
+import { SliceGenerator } from './slice/index.mjs';
 const require = createRequire(import.meta.url);
 
 export default async function (
@@ -57,6 +58,8 @@ export default async function (
   plop.setPrompt('file-tree-selection', inquirerFileTreeSelection);
 
   plop.setGenerator('page', pagesGenerator);
+
+  plop.setGenerator('slice', SliceGenerator);
 
   plop.setGenerator('api route', ApiRouteGenerator);
 

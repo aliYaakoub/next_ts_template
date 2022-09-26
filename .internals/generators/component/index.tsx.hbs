@@ -17,6 +17,7 @@ import styles from './{{ properCase componentName }}.module.css';
 import {{ properCase componentName }}Skeleton from './Skeleton';
 // conditionally render this component ⬆️ when this component is still loading (fetching data for example)
 {{/if}}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
 {{#if wantMemo}}

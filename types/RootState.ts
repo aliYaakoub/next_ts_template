@@ -1,6 +1,5 @@
-// [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
-
-import { ExampleState } from 'Slices/types';
+import { ExampleState } from 'slices/TestSlice/types';
+// COMPONENT IMPORTS
 
 /* 
   Because the redux-injectors injects your reducers asynchronously somewhere in your code
@@ -9,5 +8,5 @@ import { ExampleState } from 'Slices/types';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface RootState {
   example?: ExampleState;
-  // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
+  // SLICE TYPE
 }
