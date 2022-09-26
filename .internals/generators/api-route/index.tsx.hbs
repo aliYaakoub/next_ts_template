@@ -7,7 +7,6 @@
  */
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-// modify imports if necessary
 import type { ErrorResponse, ApiResponse } from 'types';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -50,8 +49,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(200).end();
     {{/ifIncludesAny}}
   {{/ifIncludes}}
+  {{#ifIncludesAny method 'POST' 'GET' 'DELETE' 'PUT'}}
   } else {
     return res.status(405).end();
   }
+  {{/ifIncludesAny}}
 };
  

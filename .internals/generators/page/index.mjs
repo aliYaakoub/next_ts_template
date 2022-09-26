@@ -75,12 +75,6 @@ export const pagesGenerator = {
       ? `${pagesBaseGeneratorPath}/${data.basePath}/[{{dashCase componentName}}].tsx`
       : `${pagesBaseGeneratorPath}/${data.basePath}/{{dashCase componentName}}.tsx`;
 
-    if (data.usingAnInsideApiRoute) {
-      const fileName = data.apiName.split('\\');
-      if (!fileName.at(-1).includes('.ts'))
-        throw new Error('please select a file not a folder.');
-    }
-
     const actions = [
       {
         type: 'add',
