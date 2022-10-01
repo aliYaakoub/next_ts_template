@@ -14,7 +14,7 @@ const EmptyPage: React.FC = () => {
   const router = useRouter();
 
   return (
-    <div className='h-screen bg-[#fff] flex-center p-10'>
+    <div className='h-full w-full bg-[#fff] flex-center p-10'>
       <div className='max-w-[500px] w-full flex-col-center'>
         <EmptyIcon />
         <div className='flex flex-col sm:flex-row items-center justify-between w-full mt-10'>
