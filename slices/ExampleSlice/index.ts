@@ -32,7 +32,7 @@ const slice = createSlice({
   },
 });
 
-export const { actions: cartActions } = slice;
+export const { actions: ExampleActions } = slice;
 
 export const useCartSlice = () => {
   useInjectReducer({ key: slice.name, reducer: slice.reducer });

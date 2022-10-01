@@ -1,5 +1,5 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-import { cartActions as actions } from '.';
+import { ExampleActions as actions } from '.';
 
 async function fetchPost() {
   const id = Math.ceil(Math.random() * 100);
