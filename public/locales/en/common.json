@@ -2,5 +2,6 @@
   "startByEditing": "Start by editing",
   "indexPath": "/pages/index.tsx",
   "forMoreInfo": "For more information check the",
-  "repo": "repo"
+  "repo": "repo",
+  "reduxExample": "Redux Example"
 }

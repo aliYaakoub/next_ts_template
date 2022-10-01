@@ -2,6 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import WelcomeIcon from 'public/assets/welcome_icon.svg';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   const { t } = useTranslation();
@@ -25,6 +26,11 @@ const Home: NextPage = () => {
             {t('repo')}
           </a>
         </p>
+        <Link href='/redux-example'>
+          <a className='border-b border-black font-medium'>
+            {t('reduxExample')}
+          </a>
+        </Link>
       </div>
     </main>
   );
@@ -33,7 +39,6 @@ const Home: NextPage = () => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
-  throw new TypeError("Ops, CMS didn't return a reasonable response.");
   return {
     props: {
       ...(await serverSideTranslations(locale as string, ['common'])),
