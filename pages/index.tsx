@@ -33,6 +33,7 @@ const Home: NextPage = () => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  throw new TypeError("Ops, CMS didn't return a reasonable response.");
   return {
     props: {
       ...(await serverSideTranslations(locale as string, ['common'])),
