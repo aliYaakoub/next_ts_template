@@ -9,13 +9,19 @@ import Router from 'next/router';
 import type { AppProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
 import { wrapper } from 'store/configureStore';
+import { Provider } from 'react-redux';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, ...rest }: AppProps) {
+  const { props, store } = wrapper.useWrappedStore(rest);
+  return (
+    <Provider store={store}>
+      <Component {...props} />
+    </Provider>
+  );
 }
 
-export default wrapper.withRedux(appWithTranslation(MyApp));
+export default appWithTranslation(MyApp);
