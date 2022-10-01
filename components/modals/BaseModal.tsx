@@ -34,7 +34,6 @@ const customStyles = {
 };
 
 const BaseModal: React.FC<Props> = ({ children, setExit, exit }) => {
-
   function closeModal() {
     setExit(false);
   }
@@ -48,16 +47,6 @@ const BaseModal: React.FC<Props> = ({ children, setExit, exit }) => {
       className='modal'
     >
       {children}
-      <style jsx>
-        {`
-          .articles{
-            scrollbar-width: none;
-          }
-          .articles::-webkit-scrollbar {
-            display: none;
-          }
-        `}
-      </style>
     </Modal>
   );
 };
