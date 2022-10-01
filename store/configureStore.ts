@@ -8,8 +8,9 @@ import {
   getDefaultMiddleware,
   StoreEnhancer,
   ThunkAction,
+  PayloadAction,
 } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
+import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import { createInjectorsEnhancer } from 'redux-injectors';
 import createSagaMiddleware from 'redux-saga';
 
@@ -32,9 +33,21 @@ const enhancers = [
 
 const middlewares = [sagaMiddleware];
 
+const masterReducer = (state: any, action: PayloadAction) => {
+  if (action.type === HYDRATE) {
+    // return {
+    //   ...state,
+    //   example: action.payload,
+    // };
+    return state;
+  } else {
+    return createReducer();
+  }
+};
+
 const store = () =>
   configureStore({
-    reducer: createReducer(),
+    reducer: masterReducer,
     middleware: [...customizedMiddleware, ...middlewares],
     devTools: process.env.NODE_ENV !== 'production',
     enhancers,
@@ -45,4 +58,4 @@ export type AppState = ReturnType<AppStore['getState']>;
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppState, unknown, Action>;
 
-export const wrapper = createWrapper<AppStore>(store);
+export const wrapper = createWrapper<AppStore>(store, { debug: true });
