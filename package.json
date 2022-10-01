@@ -16,8 +16,7 @@
     "prisma:studio": "prisma studio",
     "prisma:format": "prisma format",
     "prisma:db:push": "prisma db push",
-    "prisma:db:pull": "prisma db pull",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    "prisma:db:pull": "prisma db pull"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.7",
