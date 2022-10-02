@@ -55,9 +55,13 @@ export const pagesGenerator = {
     },
     {
       type: 'list',
-      name: 'renderingStyle',
-      default: 'SSR',
+      name: 'dataFetchingMethod',
+      default: 'none',
       choices: [
+        {
+          name: 'None (you dont need to fetch data)',
+          value: 'none',
+        },
         {
           name: 'Server Side Rendering (SSR)',
           value: 'SSR',
@@ -66,8 +70,20 @@ export const pagesGenerator = {
           name: 'Static Site Generation (SSG)',
           value: 'SSG',
         },
+        {
+          name: 'react-query',
+          value: 'react-query',
+        },
+        {
+          name: 'Static Site Generation (SSG) && react-query',
+          value: 'react-query&&SSG',
+        },
+        {
+          name: 'Server Side Rendering (SSR) && react-query',
+          value: 'react-query&&SSR',
+        },
       ],
-      message: 'Do you want to use SSR or SSG ?',
+      message: 'How do you want to fetch data ?',
     },
   ],
   actions: (data) => {

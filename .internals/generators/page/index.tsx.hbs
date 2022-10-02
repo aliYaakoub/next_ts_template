@@ -6,11 +6,15 @@
  *
  */
 
-{{#ifEquals renderingStyle 'SSR'}}
+{{#ifIncludesAny dataFetchingMethod 'SSR' 'react-query&&SSR'}}
 import type { GetServerSideProps, NextPage } from 'next';
-{{else}}
+{{/ifIncludesAny}}
+{{#ifIncludesAny dataFetchingMethod 'SSG' 'react-query&&SSG'}}
 import type { GetStaticProps, NextPage } from 'next';
-{{/ifEquals}}
+{{/ifIncludesAny}}
+{{#ifIncludesAny dataFetchingMethod 'none' }}
+import type { NextPage } from 'next';
+{{/ifIncludesAny}}
 import React from 'react';
 import Head from 'next/head';
 {{#if wantTranslation}}
@@ -25,6 +29,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm, FormProvider } from 'react-hook-form';
 import { Schema } from 'config/yupSchemas/{{properCase componentName}}Schema';
 {{/if}}
+{{#ifIncludesAny dataFetchingMethod 'react-query&&SSR' 'react-query&&SSG' }}
+import { QueryClient, useQuery, dehydrate } from 'react-query';
+{{/ifIncludesAny}}
+{{#ifEquals dataFetchingMethod 'react-query'}}
+import { useQuery } from 'react-query';
+{{/ifEquals}}
 
 const {{ properCase componentName }}: NextPage = () => {
   {{#if wantTranslation}}
@@ -33,6 +43,11 @@ const {{ properCase componentName }}: NextPage = () => {
   {{#if wantAForm}}
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   {{/if}}
+
+  {{#ifIncludesAny dataFetchingMethod 'react-query' 'react-query&&SSR' 'react-query&&SSR' }}
+  // specify the type of data instead of any
+  const { isLoading: dataIsLoading, data } = useQuery<any>('{{ properCase componentName }}', async () => {});
+  {{/ifIncludesAny}}
 
   {{#if wantAForm}}
   // change the type from any to the type of the form body
@@ -113,12 +128,19 @@ const {{ properCase componentName }}: NextPage = () => {
 export default {{ properCase componentName }};
 
 
-{{#ifEquals renderingStyle 'SSR'}}
+{{#ifIncludesAny dataFetchingMethod 'SSR' 'react-query&&SSR'}}
 {{#if wantTranslation}}
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
 {{else}}
 export const getServerSideProps: GetServerSideProps = async () => {
 {{/if}}
+  {{#ifEquals dataFetchingMethod 'react-query&&SSR'}}
+  const queryClient = new QueryClient();
+
+  // specify the type of data instead of any.
+  // query name must match the one in the component above.
+  await queryClient.prefetchQuery<any>('{{ properCase componentName }}', async () => {});
+  {{/ifEquals}}
   return {
     {{#if wantTranslation}}
       /* 'common' is the default json translation file, if you want to 
@@ -127,18 +149,36 @@ export const getServerSideProps: GetServerSideProps = async () => {
       for more information check the docs at https://github.com/i18next/next-i18next#readme */
     props: {
       ...(await serverSideTranslations(locale as string, ['common'])),
+      {{#ifEquals dataFetchingMethod 'react-query&&SSR'}}
+      dehydratedState: dehydrate(queryClient),
+      {{/ifEquals}}
     },
     {{else}}
-    props: {},
+    {{#ifEquals dataFetchingMethod 'react-query&&SSR'}}
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    {{else}}
+    props:{},
+    {{/ifEquals}}
     {{/if}}
   };
 };
-{{else}}
+{{/ifIncludesAny}}
+
+{{#ifIncludesAny dataFetchingMethod 'SSG' 'react-query&&SSG'}}
 {{#if wantTranslation}}
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
 {{else}}
 export const getStaticProps: GetStaticProps = async () => {
 {{/if}}
+  {{#ifEquals dataFetchingMethod 'react-query&&SSG'}}
+  const queryClient = new QueryClient();
+
+  // specify the type of data instead of any.
+  // query name must match the one in the component above.
+  await queryClient.prefetchQuery<any>('{{ properCase componentName }}', async () => {});
+  {{/ifEquals}}
   return {
     {{#if wantTranslation}}
       /* 'common' is the default json translation file, if you want to 
@@ -147,10 +187,19 @@ export const getStaticProps: GetStaticProps = async () => {
       for more information check the docs at https://github.com/i18next/next-i18next#readme */
     props: {
       ...(await serverSideTranslations(locale as string, ['common'])),
+      {{#ifEquals dataFetchingMethod 'react-query&&SSG'}}
+      dehydratedState: dehydrate(queryClient),
+      {{/ifEquals}}
     },
     {{else}}
-    props: {},
+    {{#ifEquals dataFetchingMethod 'react-query&&SSG'}}
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+    {{else}}
+    props:{},
+    {{/ifEquals}}
     {{/if}}
   };
 };
-{{/ifEquals}}
+{{/ifIncludesAny}}
