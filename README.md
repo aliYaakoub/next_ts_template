@@ -5,7 +5,7 @@ Clone this repo and run
 ```bash 
   yarn install
 ```
-<br/>
+
 
 ## Scripts
 
@@ -23,7 +23,6 @@ Clone this repo and run
 ```yarn prisma:db:push``` Introspects the database to infer and executes the changes required to make your database schema reflect the state of your Prisma schema <br/>
 ```yarn prisma:db:pull``` Connects to your database and adds Prisma models to your Prisma schema that reflect the current database schema <br/>
 
-<br/>
 
 ## Libraries used
 
@@ -39,22 +38,19 @@ Clone this repo and run
 10. [react-loading-skeleton](https://www.npmjs.com/package/react-loading-skeleton)
 11. [react-lottie](https://www.npmjs.com/package/react-lottie)
 
-<br/>
 
 ### For formating and linting
 
 1. [Prettier](https://prettier.io/)
 2. [Eslint](https://eslint.org/)
 
-<br/>
 
 ### Generating boilerplates
 
-run ``` yarn generate ``` to generate a page, component, redux slice, modal or an api route.
+run ```yarn generate``` to generate a page, component, redux slice, modal or an api route.
 
 to learn more about file generation check [Plop Docs](https://plopjs.com/), and if you want to change any configuration or templates check the ```.internals/generators``` folder in the root.
 
-<br/>
 
 ### External Resources
 
