@@ -5,27 +5,27 @@ Clone this repo and run
 ```bash 
   yarn install
 ```
-
+<br/>
 
 ## Scripts
 
-```yarn dev ``` to start the development server <br/>
-```yarn build ``` to build the application for production usage <br/>
-```yarn start ``` to start a production server <br/>
-```yarn lint ``` to set up Next.js's built-in ESLint configuration <br/>
-```yarn generate ``` to [generate a boilerplate]() <br/>
-```yarn format ``` to check if your code is formatted (prettier plugin) <br/>
-```yarn format:fix ``` to fix any unformatted files <br/>
-```yarn lint:ts ``` to check for any unlinted files <br/>
-```yarn prisma:generate ``` to Generate Prisma Client <br/>
-```yarn prisma:generate:watch ``` to generate Prisma Client and continue to watch the schema <br/>
-```yarn prisma:studio ``` to open prisma studio <br/>
-```yarn prisma:db:push ``` Introspects the database to infer and executes the changes required to make your database schema reflect the state of your Prisma schema <br/>
-```yarn prisma:db:pull ``` Connects to your database and adds Prisma models to your Prisma schema that reflect the current database schema <br/>
+```yarn dev``` to start the development server <br/>
+```yarn build``` to build the application for production usage <br/>
+```yarn start``` to start a production server <br/>
+```yarn lint``` to set up Next.js's built-in ESLint configuration <br/>
+```yarn generate``` to [generate a boilerplate](https://github.com/aliYaakoub/next_ts_template#generating-boilerplates) <br/>
+```yarn format``` to check if your code is formatted (prettier plugin) <br/>
+```yarn format:fix``` to fix any unformatted files <br/>
+```yarn lint:ts``` to check for any unlinted files <br/>
+```yarn prisma:generate``` to Generate Prisma Client <br/>
+```yarn prisma:generate:watch``` to generate Prisma Client and continue to watch the schema <br/>
+```yarn prisma:studio``` to open prisma studio <br/>
+```yarn prisma:db:push``` Introspects the database to infer and executes the changes required to make your database schema reflect the state of your Prisma schema <br/>
+```yarn prisma:db:pull``` Connects to your database and adds Prisma models to your Prisma schema that reflect the current database schema <br/>
 
+<br/>
 
-
-## Libraries
+## Libraries used
 
 1. [Tailwind CSS](https://tailwindcss.com/)
 2. [react-redux](https://react-redux.js.org/)
@@ -39,17 +39,22 @@ Clone this repo and run
 10. [react-loading-skeleton](https://www.npmjs.com/package/react-loading-skeleton)
 11. [react-lottie](https://www.npmjs.com/package/react-lottie)
 
+<br/>
 
 ### For formating and linting
 
 1. [Prettier](https://prettier.io/)
 2. [Eslint](https://eslint.org/)
 
+<br/>
 
-### For generating boilerplates
+### Generating boilerplates
 
-1. [Plop](https://plopjs.com/)
+run ``` yarn generate ``` to generate a page, component, redux slice, modal or an api route.
 
+to learn more about file generation check [Plop Docs](https://plopjs.com/), and if you want to change any configuration or templates check the ```.internals/generators``` folder in the root.
+
+<br/>
 
 ### External Resources
 
