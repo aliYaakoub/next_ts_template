@@ -4,4 +4,6 @@ module.exports = {
   trailingComma: 'all',
   tabWidth: 2,
   jsxSingleQuote: true,
+  useTabs: false,
+  arrowParens: "avoid"
 };
