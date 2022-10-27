@@ -43,5 +43,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off', // Next.JS specific
     'react/display-name': 'off',
     '@typescript-eslint/no-empty-function': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
 };
